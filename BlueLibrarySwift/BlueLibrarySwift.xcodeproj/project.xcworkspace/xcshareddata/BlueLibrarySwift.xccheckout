@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B2EA1DAD-C0F1-4925-9906-9D30A53D4270</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BlueLibrarySwift</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C6914243F2035D7ED12DAEFCD030801FA73D9D9F</key>
+		<string>https://github.com/perrychen901105/iosDesignPattern_BlueLibrarySwift.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BlueLibrarySwift/BlueLibrarySwift.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C6914243F2035D7ED12DAEFCD030801FA73D9D9F</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/perrychen901105/iosDesignPattern_BlueLibrarySwift.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C6914243F2035D7ED12DAEFCD030801FA73D9D9F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C6914243F2035D7ED12DAEFCD030801FA73D9D9F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iosDesignPattern_BlueLibrarySwift</string>
+		</dict>
+	</array>
+</dict>
+</plist>
