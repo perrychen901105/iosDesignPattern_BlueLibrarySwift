@@ -17,6 +17,7 @@
 		2C3A7C1E1AB86C1800C41CAD /* LibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A7C1D1AB86C1800C41CAD /* LibraryAPI.swift */; };
 		2C3A7C201AB871C300C41CAD /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A7C1F1AB871C300C41CAD /* PersistencyManager.swift */; };
 		C230A4791AB7B243003322CB /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C230A4781AB7B243003322CB /* AlbumView.swift */; };
+		C23983501AB9756000D8AC8D /* AlbumExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C239834F1AB9756000D8AC8D /* AlbumExtensions.swift */; };
 		C2E88D0F1AB6DA5F00C485F9 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E88D0E1AB6DA5F00C485F9 /* Album.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		2C3A7C1D1AB86C1800C41CAD /* LibraryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAPI.swift; sourceTree = "<group>"; };
 		2C3A7C1F1AB871C300C41CAD /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 		C230A4781AB7B243003322CB /* AlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
+		C239834F1AB9756000D8AC8D /* AlbumExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumExtensions.swift; sourceTree = "<group>"; };
 		C2E88D0E1AB6DA5F00C485F9 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				C2E88D0E1AB6DA5F00C485F9 /* Album.swift */,
+				C239834F1AB9756000D8AC8D /* AlbumExtensions.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				101DD6CD1A052EDE00161F0D /* ViewController.swift in Sources */,
+				C23983501AB9756000D8AC8D /* AlbumExtensions.swift in Sources */,
 				101DD6CB1A052EDE00161F0D /* AppDelegate.swift in Sources */,
 				2C3A7C1E1AB86C1800C41CAD /* LibraryAPI.swift in Sources */,
 				101DD6EC1A052F0E00161F0D /* HTTPClient.swift in Sources */,

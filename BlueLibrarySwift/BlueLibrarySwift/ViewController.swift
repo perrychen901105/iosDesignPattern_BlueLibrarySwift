@@ -27,8 +27,26 @@ class ViewController: UIViewController {
 	@IBOutlet var dataTable: UITableView!
 	@IBOutlet var toolbar: UIToolbar!
 	
+    private var allAlbums = [Album]()
+    private var currentAlbumData: (titles: [String], values: [String])?
+    private var currentAlbumIndex = 0
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        
+        // 1
+        self.navigationController?.navigationBar.translucent = false
+        currentAlbumIndex = 0
+        
+        // 2
+        allAlbums = LibraryAPI.sharedInstance.getAlbums()
+        
+        // 3
+        // the uitableview that presents the album data
+        dataTable.delegate = self
+        dataTable.dataSource = self
+        dataTable.backgroundView = nil
+        view.addSubview(dataTable!)
 		// Do any additional setup after loading the view, typically from a nib.
 	}
 
@@ -37,6 +55,27 @@ class ViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 
+    func showDataForAlbum(albumIndex: Int) {
+        // defensive code: make sure the requested index is lower than the amoutn of albums
+        if (albumIndex < allAlbums.count && albumIndex > -1) {
+            // fetch the album
+            let album = allAlbums[albumIndex]
+            // save the albums data to present it later in the tableview
+            currentAlbumData = album.ae_tableRepresentation()
+        } else {
+            currentAlbumData = nil
+        }
+        // 
+        dataTable!.reloadData()
+    }
 
+}
+
+extension ViewController: UITableViewDataSource {
+    
+}
+
+extension ViewController: UITableViewDelegate {
+    
 }
 

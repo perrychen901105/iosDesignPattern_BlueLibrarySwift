@@ -9,6 +9,10 @@
 import UIKit
 
 class LibraryAPI: NSObject {
+    private let persistencyManager: PersistencyManager
+    private let httpClient: HTTPClient
+    private let isOnline: Bool
+    
    // 1
     /// Create a class variable as a computed type property. The class variable, like class methods in Obj-c, is something you can call without having to instantiate the class LibraryAPI
     class var sharedInstance: LibraryAPI {
@@ -22,4 +26,32 @@ class LibraryAPI: NSObject {
         // 4
         return Singleton.instance
     }
+
+    override init() {
+        persistencyManager = PersistencyManager()
+        httpClient = HTTPClient()
+        isOnline = false
+        
+        super.init()
+    }
+    
+    
+    func getAlbums() -> [Album] {
+        return persistencyManager.getAlbums()
+    }
+    
+    func addAlbum(album: Album, index: Int) {
+        persistencyManager.addAlbum(album, index: index)
+        if isOnline {
+            httpClient.postRequest("/api/addAlbum", body: album.description)
+        }
+    }
+    
+    func deleteAlbum(index: Int) {
+        persistencyManager.deleteAlbumAtIndex(index)
+        if isOnline {
+            httpClient.postRequest("/api/deleteAlbum", body: "\(index)")
+        }
+    }
+    
 }
