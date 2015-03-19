@@ -27,6 +27,9 @@ class AlbumView: UIView {
         indicator.activityIndicatorViewStyle = .WhiteLarge
         indicator.startAnimating()
         addSubview(indicator)
+        
+    NSNotificationCenter.defaultCenter().postNotificationName("BLDownloadImageNotification", object: self, userInfo: ["imageView":coverImage, "coverUrl": albumCover])
+        
     }
 
     func highlightAlbum(#didHighlightView: Bool) {
