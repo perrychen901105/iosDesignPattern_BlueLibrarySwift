@@ -32,6 +32,8 @@ class ViewController: UIViewController {
     private var currentAlbumData: (titles: [String], values: [String])?
     private var currentAlbumIndex = 0
     
+    var undoStack: [(Album, Int)] = []
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
         
@@ -56,12 +58,24 @@ class ViewController: UIViewController {
         scroller.delegate = self
         reloadScroller()
         
+        let undoButton = UIBarButtonItem(barButtonSystemItem: .Undo, target: self, action: "undoAction")
+        undoButton.enabled = false
+        let space = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let trashButton = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: "deleteAlbum")
+        let toolbarButtonItems = [undoButton, space, trashButton]
+        toolbar
+        
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveCurrentState", name: UIApplicationDidEnterBackgroundNotification, object: nil)
 		// Do any additional setup after loading the view, typically from a nib.
 	}
 
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func initialViewIndex(scroller: HorizontalScroller) -> Int {
+        return currentAlbumIndex
     }
     
 	override func didReceiveMemoryWarning() {
@@ -99,6 +113,7 @@ class ViewController: UIViewController {
         // When the user leaves the app and then comes back again, he wants it to be in the exact same state he left it. In order to do this we need to save the currently displayed album.
         // Since it's only one piece of information we can use NSUserDefaults.
         NSUserDefaults.standardUserDefaults().setInteger(currentAlbumIndex, forKey: "currentAlbumIndex")
+        LibraryAPI.sharedInstance.saveAlbums()
     }
     
     func loadPreviousState() {
