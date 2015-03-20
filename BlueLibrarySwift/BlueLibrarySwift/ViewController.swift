@@ -51,11 +51,19 @@ class ViewController: UIViewController {
         
         self.showDataForAlbum(currentAlbumIndex)
         
+        loadPreviousState()
+        
         scroller.delegate = self
         reloadScroller()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveCurrentState", name: UIApplicationDidEnterBackgroundNotification, object: nil)
 		// Do any additional setup after loading the view, typically from a nib.
 	}
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
@@ -83,6 +91,18 @@ class ViewController: UIViewController {
             currentAlbumIndex = allAlbums.count - 1
         }
         scroller.reload()
+        showDataForAlbum(currentAlbumIndex)
+    }
+    
+    //MARK: Memento Pattern
+    func saveCurrentState() {
+        // When the user leaves the app and then comes back again, he wants it to be in the exact same state he left it. In order to do this we need to save the currently displayed album.
+        // Since it's only one piece of information we can use NSUserDefaults.
+        NSUserDefaults.standardUserDefaults().setInteger(currentAlbumIndex, forKey: "currentAlbumIndex")
+    }
+    
+    func loadPreviousState() {
+        currentAlbumIndex = NSUserDefaults.standardUserDefaults().integerForKey("currentAlbumIndex")
         showDataForAlbum(currentAlbumIndex)
     }
     
