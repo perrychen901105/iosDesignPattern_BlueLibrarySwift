@@ -63,7 +63,7 @@ class ViewController: UIViewController {
         let space = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
         let trashButton = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: "deleteAlbum")
         let toolbarButtonItems = [undoButton, space, trashButton]
-        toolbar
+        toolbar.setItems(toolbarButtonItems, animated: true)
         
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveCurrentState", name: UIApplicationDidEnterBackgroundNotification, object: nil)
@@ -97,6 +97,54 @@ class ViewController: UIViewController {
         dataTable!.reloadData()
     }
 
+    func addAlbumAtIndex(album: Album, index: Int) {
+        LibraryAPI.sharedInstance.addAlbum(album, index: index)
+        currentAlbumIndex = index
+        reloadScroller()
+    }
+    
+    func deleteAlbum() {
+        // 1
+        // get the album to delete
+        var deletedAlbum: Album = allAlbums[currentAlbumIndex]
+        // 2
+        // create a variable called undoAction
+        var undoAction = (deletedAlbum, currentAlbumIndex)
+        undoStack.insert(undoAction, atIndex: 0)
+        // 3
+        // Use LibraryAPI to delete the album from the data structure and reload the scroller
+        LibraryAPI.sharedInstance.deleteAlbum(currentAlbumIndex)
+        reloadScroller()
+        // 4
+        let barButtonItems = toolbar.items as [UIBarButtonItem]
+        var undoButton: UIBarButtonItem = barButtonItems[0]
+        undoButton.enabled = true
+        // 5
+        if allAlbums.count == 0 {
+            var trashButton: UIBarButtonItem = barButtonItems[2]
+            trashButton.enabled = false
+        }
+    }
+    
+    func undoAction() {
+        let barButtonItems = toolbar.items as [UIBarButtonItem]
+        // 1
+        if undoStack.count > 0 {
+            let (deletedAlbum, index) = undoStack.removeAtIndex(0)
+            addAlbumAtIndex(deletedAlbum, index: index)
+        }
+        
+        // 2
+        if undoStack.count == 0 {
+            var undoButton : UIBarButtonItem = barButtonItems[0]
+            undoButton.enabled = false
+        }
+        
+        // 3
+        let trashButton: UIBarButtonItem = barButtonItems[2]
+        trashButton.enabled = true
+    }
+    
     func reloadScroller() {
         allAlbums = LibraryAPI.sharedInstance.getAlbums()
         if currentAlbumIndex < 0 {
